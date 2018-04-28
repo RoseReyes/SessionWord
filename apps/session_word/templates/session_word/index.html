@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'session_word/css/session_words.css' %}" media="screen" title="no title"  charset="utf-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="addcolor">
+            <form action= "/session_word/add_word" method = "POST">
+                {% csrf_token %}
+                <p>Add a new word: <input type ="text" name="word"></p>
+                <p>Choose color</p>
+                <p><input type="radio" name="color" value="red">Red</p>
+                <p><input type="radio" name="color" value="green">Green</p>
+                <p><input type="radio" name="color" value="blue">Blue</p>
+                <p><input type="hidden" name="size" value="not_big"></p>
+                <p><input type="checkbox" name="size" value="big">Show in BIG fonts!</p>
+                <input type= "Submit" name="add" value="Add to Session">
+            </form>
+        </div>
+        <div class="displaycolor">
+            <form action= "/session_word/clear" method = "POST">
+                {% csrf_token %}
+                <input type= "Submit" name="clear" value="Clear Session">
+            </form>
+        </div>
+        <ul>
+            {% for item in request.session.wordlist %}
+                <li class="{{ item.color }} {{ item.size }}"> {{ item.word }} {{ item.time }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

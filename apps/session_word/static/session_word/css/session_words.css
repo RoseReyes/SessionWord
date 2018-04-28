@@ -1,0 +1,18 @@
+.red {
+    color:red;
+}
+.green {
+    color:green;
+}
+.blue {
+    color:blue;
+}
+.fonts {
+    font-weight: bold;
+}
+.not_big {
+    font-size: 0;
+}
+.big {
+    font-size: 20px;
+}
